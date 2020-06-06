@@ -1,0 +1,113 @@
+<mat-toolbar *ngIf="successMsg" color="primary">{{ successMsg }}</mat-toolbar>
+<mat-toolbar *ngIf="errorMsg" color="warn">{{ errorMsg }}</mat-toolbar>
+<div class="form-container" >
+
+  <form (submit)="createAppointment()">
+    <mat-form-field>
+      <input [(ngModel)]="appointmentDate" name="appointmentDate" matInput [matDatepicker]="picker" placeholder="Choose a date">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field>
+      <input [(ngModel)]="name" name="name" matInput placeholder="Name">
+    </mat-form-field>
+    <mat-form-field>
+      <input [(ngModel)]="email" name="email" matInput placeholder="Email" type="email">
+    </mat-form-field>
+
+    <mat-form-field >
+      <mat-label>StartTime</mat-label>
+      <!-- <span matPrefix>HH:MM:SS &nbsp;</span> -->
+      <input  [(ngModel)]="startTime" name="startTime"
+      (ngModelChange)="fromTime(startTime)"
+      matInput #fromtime maxlength="8" placeholder="00:00:00">
+      <!-- <mat-icon matSuffix>mode_edit</mat-icon> -->
+         <!-- <mat-hint align="start"><strong>HH:MM:SS</strong> </mat-hint> -->
+      
+         <mat-hint align="end" >
+          <strong>24 hrs format</strong>
+         </mat-hint>
+         <mat-hint align="start" *ngIf=" fromtime.value.length == 0 ">
+          <strong>  HH:MM:SS</strong>
+         </mat-hint>
+
+         <mat-hint align="start" *ngIf=" fromtime.value.length > 0 && fromtime.value.length <= 2">
+           <strong>HH:</strong>
+          </mat-hint>
+
+
+         <mat-hint align="start" *ngIf=" fromtime.value.length > 2 && fromtime.value.length <= 5">
+          <strong>  HH:MM:</strong>
+          </mat-hint>
+           <mat-hint align="start" *ngIf=" fromtime.value.length > 5 && fromtime.value.length <= 8"> 
+          
+            <strong>  HH:MM:SS</strong>
+          </mat-hint>
+    </mat-form-field>
+
+
+
+    <mat-form-field >
+      <mat-label>EndTime</mat-label>
+      <!-- <span matPrefix>HH:MM:SS &nbsp;</span> -->
+      <input  [(ngModel)]="endTime" name="endTime"
+      (ngModelChange)="toTime()"
+      matInput #totime maxlength="8" placeholder="00:00:00">
+      <!-- <mat-icon matSuffix>mode_edit</mat-icon> -->
+         <!-- <mat-hint align="start"><strong>HH:MM:SS</strong> </mat-hint> -->
+         <mat-hint align="end" >
+          <strong>24 hrs format</strong>
+         </mat-hint>
+         <mat-hint align="start" *ngIf=" totime.value.length == 0 ">
+          <strong>  HH:MM:SS</strong>
+         </mat-hint>
+
+         <mat-hint align="start" *ngIf=" totime.value.length > 0 && totime.value.length <= 2">
+           <strong>HH:</strong>
+          </mat-hint>
+
+
+         <mat-hint align="start" *ngIf=" totime.value.length > 2 && totime.value.length <= 5">
+          <strong>  HH:MM:</strong>
+          </mat-hint>
+           <mat-hint align="start" *ngIf=" totime.value.length > 5 && totime.value.length <= 8"> 
+          
+            <strong>  HH:MM:SS</strong>
+          </mat-hint>
+    </mat-form-field>
+
+
+
+    <mat-form-field >
+      <mat-label>Duration</mat-label>
+      <!-- <span matPrefix>HH:MM:SS &nbsp;</span> -->
+      <input [disabled]="true" [(ngModel)]="duration" name="duration" matInput #message maxlength="8" placeholder="00:00:00">
+      <!-- <mat-icon matSuffix>mode_edit</mat-icon> -->
+         <!-- <mat-hint align="start"><strong>HH:MM:SS</strong> </mat-hint> -->
+         <mat-hint align="end" >
+          <strong>24 hrs format</strong>
+         </mat-hint>
+         <mat-hint align="start" *ngIf=" message.value.length == 0 ">
+          <strong>  HH:MM:SS</strong>
+         </mat-hint>
+
+         <mat-hint align="start" *ngIf=" message.value.length > 0 && message.value.length <= 2">
+           <strong>HH:</strong>
+          </mat-hint>
+
+
+         <mat-hint align="start" *ngIf=" message.value.length > 2 && message.value.length <= 5">
+          <strong>  HH:MM:</strong>
+          </mat-hint>
+           <mat-hint align="start" *ngIf=" message.value.length > 5 && message.value.length <= 8"> 
+          
+            <strong>  HH:MM:SS</strong>
+          </mat-hint>
+    </mat-form-field>
+<br>
+
+   
+    <button mat-raised-button color="primary">Make Appointment</button>
+  </form>
+</div>
+
