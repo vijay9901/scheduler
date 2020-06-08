@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AppointmentService } from '../appointment.service';
 import { Appointment } from '../Appointment';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-appointment',
@@ -18,10 +19,12 @@ export class AppointmentComponent implements OnInit {
   startTime:string;
   endTime:string;
 
-  constructor(private appointmentService: AppointmentService) { }
+  constructor(private appointmentService: AppointmentService,private _snackBar: MatSnackBar) { }
 
   ngOnInit() {
   }
+
+ 
 
 timeValidate(time){
   if (time.length == 2 ) {
@@ -136,10 +139,20 @@ singleDigit(){
         this.startTime = '';
         const appointmentDate = new Date(createdAppointment.appointmentDate).toDateString();
         this.successMsg = `Appointment Booked Successfully for ${appointmentDate}`;
+        this._snackBar.open( this.successMsg , "", {
+          duration: 2000,
+          panelClass: ['mat-toolbar', 'mat-primary']
+        });
       },
       (error: ErrorEvent) => {
         this.errorMsg = error.error.message;
+        this._snackBar.open(error.error.message, "", {
+          duration: 2000,
+          panelClass: ['mat-toolbar', 'mat-warn']
+        });
       });
   }
+
+
 
 }

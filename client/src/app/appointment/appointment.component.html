@@ -1,5 +1,4 @@
-<mat-toolbar *ngIf="successMsg" color="primary">{{ successMsg }}</mat-toolbar>
-<mat-toolbar *ngIf="errorMsg" color="warn">{{ errorMsg }}</mat-toolbar>
+
 <div class="form-container" >
 
   <form (submit)="createAppointment()">
@@ -15,7 +14,7 @@
       <input [(ngModel)]="email" name="email" matInput placeholder="Email" type="email">
     </mat-form-field>
 
-    <mat-form-field >
+    <mat-form-field >   
       <mat-label>StartTime</mat-label>
       <!-- <span matPrefix>HH:MM:SS &nbsp;</span> -->
       <input  [(ngModel)]="startTime" name="startTime"
